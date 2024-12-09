@@ -46,7 +46,7 @@ Term = { Address | Byte | Nibble | Identifier | Bin | Hex }
 
 Identifier = @{ ASCII_ALPHA+ }
 
-Label = @{ASCII_ALPHA+ ~ ":" }
+Label = @{ ASCII_ALPHA+ ~ ":" }
 
 Address = @{ "%" ~ ASCII_BIN_DIGIT{12} }
 
@@ -59,6 +59,6 @@ Hex = @{ "#" ~ ASCII_HEX_DIGIT+ }
 
 WHITESPACE = _{ " " | "\t" }
 
-COMMENT = _{ ";" ~ ASCII+* ~ !NEWLINE ~ ANY } // disallow inline comments
+COMMENT = _{ ";" ~ ANY* ~ !NEWLINE } // disallow inline comments
 
 EOF = _{ EOI }
