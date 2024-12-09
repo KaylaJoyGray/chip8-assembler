@@ -1,0 +1,64 @@
+// Instruction types:
+// Empty: CLS, RET
+// Unary: (left-associative): JP addr
+// Binary (left-associative): LD register, addr
+// Ternary (left-associative): DRW register, register, nibble
+
+Program = _{ SOI ~ Line ~ EOF }
+
+Line = _{ Expr ~ NEWLINE }
+
+Expr = { NullExpr |  UnaryExpr | BinaryExpr | TernaryExpr | Macro | Label }
+
+NullExpr = { NullInstr }
+
+UnaryExpr = { UnaryInstr ~ Term  }
+
+BinaryExpr = { BinaryInstr ~ Term ~ Term }
+
+TernaryExpr = { TernaryInstr ~ Term ~ Term ~ Term }
+
+Macro = { Define ~ Identifier ~ Term  }
+
+NullInstr = { "CLS" | "RET" }
+
+UnaryInstr = { "SYS" | "JP" | "CALL" | "SKP" | "SKNP" }
+
+BinaryInstr = { "SE" | "SNE" | "LD"  |
+                "ADD" | "SUB" | "SUBN"|
+                "AND" | "OR"  |
+                "XOR" | "SHR" | "SHL" |
+                "JP"  | "RND" }
+
+TernaryInstr =  { "DRW" }
+
+Register = { GeneralPurposeReg | SpecialReg | AddressReg }
+
+GeneralPurposeReg = @{ "V" ~ ASCII_HEX_DIGIT }
+
+SpecialReg = { "DT" | "ST" }
+
+AddressReg = { "I" }
+
+Define = { "define" }
+
+Term = { Address | Byte | Nibble | Identifier | Bin | Hex }
+
+Identifier = @{ ASCII_ALPHA+ }
+
+Label = @{ASCII_ALPHA+ ~ ":" }
+
+Address = @{ "%" ~ ASCII_BIN_DIGIT{12} }
+
+Byte = @{ "%" ~ ASCII_BIN_DIGIT{8} }
+
+Nibble = @{ "%" ~ ASCII_BIN_DIGIT{4} }
+
+Bin = @{ "%" ~ ASCII_BIN_DIGIT+ }
+Hex = @{ "#" ~ ASCII_HEX_DIGIT+ }
+
+WHITESPACE = _{ " " | "\t" }
+
+COMMENT = _{ ";" ~ ASCII+* ~ !NEWLINE ~ ANY } // disallow inline comments
+
+EOF = _{ EOI }
