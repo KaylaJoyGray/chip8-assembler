@@ -24,7 +24,7 @@ NullInstr = { "CLS" | "RET" }
 
 UnaryInstr = { "SYS" | "JP" | "CALL" | "SKP" | "SKNP" }
 
-BinaryInstr = { "SE" | "SNE" | "LD"  |
+BinaryInstr = { "SE"  | "SNE" | "LD"  |
                 "ADD" | "SUB" | "SUBN"|
                 "AND" | "OR"  |
                 "XOR" | "SHR" | "SHL" |
