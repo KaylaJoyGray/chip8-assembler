@@ -48,7 +48,7 @@ Identifier = @{ ASCII_ALPHA+ }
 
 Label = @{ ASCII_ALPHA+ ~ ":" }
 
-Int = @{ ASCII_DIGIT }
+Int = @{ ASCII_DIGIT+ }
 Bin = @{ "%" ~ ASCII_BIN_DIGIT+ }
 Hex = @{ "#" ~ ASCII_HEX_DIGIT+ }
 
