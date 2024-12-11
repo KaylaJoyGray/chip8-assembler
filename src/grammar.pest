@@ -42,18 +42,13 @@ AddressReg = { "I" }
 
 Define = { "define" }
 
-Term = { Address | Byte | Nibble | Identifier | Bin | Hex }
+Term = { Identifier | Int |  Bin | Hex }
 
 Identifier = @{ ASCII_ALPHA+ }
 
 Label = @{ ASCII_ALPHA+ ~ ":" }
 
-Address = @{ "%" ~ ASCII_BIN_DIGIT{12} }
-
-Byte = @{ "%" ~ ASCII_BIN_DIGIT{8} }
-
-Nibble = @{ "%" ~ ASCII_BIN_DIGIT{4} }
-
+Int = @{ ASCII_DIGIT }
 Bin = @{ "%" ~ ASCII_BIN_DIGIT+ }
 Hex = @{ "#" ~ ASCII_HEX_DIGIT+ }
 

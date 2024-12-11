@@ -1,5 +1,4 @@
-#[derive(pest_derive::Parser)]
-#[grammar = "grammar.pest"]
-struct Chip8ASMParser;
+mod ast;
+mod parser;
 
 fn main() {}
