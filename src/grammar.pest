@@ -8,7 +8,7 @@ Program = _{ SOI ~ Line ~ EOF }
 
 Line = _{ Expr ~ NEWLINE }
 
-Expr = { NullExpr |  UnaryExpr | BinaryExpr | TernaryExpr | Macro | Label }
+Expr = { NullExpr |  UnaryExpr | BinaryExpr | TernaryExpr | Label }
 
 NullExpr = { NullInstr }
 
@@ -17,8 +17,6 @@ UnaryExpr = { UnaryInstr ~ Term  }
 BinaryExpr = { BinaryInstr ~ Term ~ Term }
 
 TernaryExpr = { TernaryInstr ~ Term ~ Term ~ Term }
-
-Macro = { Define ~ Identifier ~ Term  }
 
 NullInstr = { "CLS" | "RET" }
 
@@ -39,8 +37,6 @@ GeneralPurposeReg = @{ "V" ~ ASCII_HEX_DIGIT }
 SpecialReg = { "DT" | "ST" }
 
 AddressReg = { "I" }
-
-Define = { "define" }
 
 Term = { Identifier | Int |  Bin | Hex }
 

@@ -65,10 +65,33 @@ pub(crate) enum Register {
     Special(SpecialReg),
 }
 
+pub(crate) enum AstBuildError {
+    AddressOutOfBounds,
+}
+
+pub(crate) struct Address {
+    address: u16,
+}
+
+impl Address {
+    pub(crate) fn new(address: u16) -> Result<Self, AstBuildError> {
+        if address > 0xFFF {
+            return Err(AstBuildError::AddressOutOfBounds);
+        }
+
+        Ok(Self { address })
+    }
+
+    pub fn get(&self) -> u16 {
+        self.address
+    }
+}
+
 /// macros not included
 /// macros resolved when building the AST
 pub(crate) enum Node {
-    Literal(u16),
+    Address,
+    Literal(u8),
     Register(Register),
     Label(String),
     NullExpr {
