@@ -7,6 +7,8 @@ use std::collections::HashMap;
 #[grammar = "grammar.pest"]
 struct Chip8ASMParser;
 
+// This is a good place to use the type state pattern instead
+// raw input -> macros expanded -> symbol table built -> final AST
 pub(crate) fn parse(input: &mut str) -> Result<Vec<Node>, pest::error::Error<Rule>> {
     let mut ast = vec![];
 
